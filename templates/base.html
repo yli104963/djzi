@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	{% block td %}{% endblock %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{#    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}">#}
+
+	<!-- STYLES -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/slick.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <link rel="canonical" href="{{ request.path }}">
+	<!--[if lt IE 9]>
+      <script src="{% static 'js/html5shiv.min.js' %}"></script>
+      <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+
+</head>
+<body>
+    {% include 'preloader.html' %}
+    {% block content %}{% endblock %}
+    {% include 'footer.html' %}
+    <!-- JAVA SCRIPTS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

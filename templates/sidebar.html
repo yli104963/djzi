@@ -1,0 +1,107 @@
+{% load static %}
+<!-- sidebar -->
+<div class="sidebar">
+    <!-- widget about -->
+    <div class="widget rounded">
+        <div class="widget-about data-bg-image text-center" data-bg-image="{% static 'images/map-bg.png' %}">
+            <img src="{% static 'images/logo.svg' %}" alt="logo" class="mb-4"/>
+            <p class="mb-4">为什么要在意别人的想法呢？记住该记住的，忘记该忘记的；改变能改变的，接受不能接受的。 人之会痛苦，是追求太多；人之所不快乐，是计较太多；人之所活的累，是想的太多。</p>
+            <ul class="social-icons list-unstyled list-inline mb-0">
+                <li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>
+{#                <li class="list-inline-item"><a href="#"><i class="fab fa-weixin"></i></a></li>#}
+                <li class="list-inline-item"><a href="{% url 'article:go3' %}"><i class="fab fa-weibo"></i></a></li>
+                <li class="list-inline-item"><a href="{% url 'article:go4' %}"><i class="fab fa-zhihu"></i></a></li>
+{#                <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>#}
+                <li class="list-inline-item"><a href="{% url 'article:go6' %}"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="widget rounded">
+        <div class="widget-header text-center">
+            <h3 class="widget-title">热门文章</h3>
+            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave"/>
+        </div>
+        <div class="widget-content">
+            <ul class="list">
+                {% for foo in articleslist_select %}
+                    <li><a href="{% url 'article:article_detail' foo.id %}">{{ foo.title|slice:18 }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- widget tags -->
+    <div class="widget rounded">
+        <div class="widget-header text-center">
+            <h3 class="widget-title">文章标签</h3>
+            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave"/>
+        </div>
+        <div class="widget-content">
+            {% for tag in tags %}
+                <a href="{% url 'article:article_tags' tag.pk %}" class="tag">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- widget categories -->
+    <div class="widget rounded">
+        <div class="widget-header text-center">
+            <h3 class="widget-title">分类统计</h3>
+            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave"/>
+        </div>
+        <div class="widget-content">
+            <ul class="list">
+                {% for foo in select_sort %}
+                    <li><a href="{% url 'article:article_category' foo.id %}">{{ foo.SortTitle }}</a><span>共{{ foo.num_posts }}篇</span></li>
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- widget post carousel -->
+    <div class="widget rounded">
+        <div class="widget-header text-center">
+            <h3 class="widget-title">随机推荐</h3>
+            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave"/>
+        </div>
+        <div class="widget-content">
+            <div class="post-carousel-widget">
+                <!-- post -->
+                {% for article in articleslist_tui %}
+                    <div class="post post-carousel">
+                        <div class="thumb rounded">
+                            <span class="category-badge position-absolute">{{ article.arSort }}</span>
+                                <div class="inner">
+                                    <img src="{{ article.arImg.url }}" alt="post-title"/>
+                                </div>
+                        </div>
+                        <h5 class="post-title mb-0 mt-4"><a href="{% url 'article:article_detail' article.id %}">{{ article.title }}</a></h5>
+                        <ul class="meta list-inline mt-2 mb-0">
+                            <li class="list-inline-item">{{ article.author }}</li>
+                            <li class="list-inline-item">{{ article.poTime }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <!-- carousel arrows -->
+            <div class="slick-arrows-bot">
+                <button type="button" data-role="none" class="carousel-botNav-prev slick-custom-buttons"
+                        aria-label="Previous"><i class="icon-arrow-left"></i></button>
+                <button type="button" data-role="none" class="carousel-botNav-next slick-custom-buttons"
+                        aria-label="Next"><i class="icon-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- widget advertisement -->
+    {#    <div class="widget no-container rounded text-md-center">#}
+    {#        <span class="ads-title">- Sponsored Ad -</span>#}
+    {#        <a href="#" class="widget-ads">#}
+    {#            <img src="{% static 'images/ads/ad-360.png' %}" alt="Advertisement"/>#}
+    {#        </a>#}
+    {#    </div>#}
+
+</div>
+
+
+<!-- end site wrapper -->

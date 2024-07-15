@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block td %}
+    <title>关于我</title>
+    <meta name="description" content="关于我描述">
+{% endblock %}
+{% block content %}
+
+
+<!-- site wrapper -->
+<div class="site-wrapper">
+
+	<div class="main-overlay"></div>
+
+	<!-- header -->
+    {% include 'header.html' %}
+
+    <!-- page header -->
+    <section class="page-header">
+        <div class="container-xl">
+            <div class="text-center">
+                <h1 class="mt-0 mb-2">关于我</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'article:article_list_index' %}">主页</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">关于</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+	<!-- section main content -->
+	<section class="main-content">
+		<div class="container-xl">
+
+			<div class="row gy-4">
+
+				<div class="col-lg-8">
+
+                    <div class="page-content bordered rounded padding-30">
+                            {{ aboutme.aboutmebody|safe }}
+                        <hr class="my-4" />
+{#                        <ul class="social-icons list-unstyled list-inline mb-0">#}
+{#                            <li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-weixin"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-weibo"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-zhihu"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#                        </ul>#}
+                    <span>世上只有两种编程语言：一种是总是被人骂的，一种是从来没人用的。</span>
+                    </div>
+
+                </div>
+				<div class="col-lg-4">
+                    {% include 'sidebar.html' %}
+					<!-- sidebar -->
+                </div>
+            </div>
+
+		</div>
+	</section>
+
+
+</div><!-- end site wrapper -->
+
+<!-- search popup area -->
+{% include 'search.html' %}
+
+<!-- canvas menu -->
+{% include 'sidermenu.html' %}
+
+{% endblock %}

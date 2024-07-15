@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block td %}
+    <title>{{ indexseo.IndexSeotTitle }}</title>
+    <meta name="description" content="{{ indexseo.IndexSeoDes }}">
+{% endblock %}
+{% block content %}
+    <div class="site-wrapper">
+
+        <div class="main-overlay"></div>
+
+        <!-- header -->
+        <header class="header-personal light">
+            <div class="container-xl header-top">
+                <div class="row align-items-center">
+
+                    <div class="col-4 d-none d-md-block d-lg-block">
+                        “没有绝世神功”
+                        <!-- social icons -->
+{#                        <span class="social-icons list-unstyled list-inline mb-0">#}
+{#                            <li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href=""><i class="fab fa-weixin"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-weibo"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-zhihu"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#                        </span>#}
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+                        <a href="{% url 'article:article_list_index' %}" class="d-block text-logo">风轻云淡<span class="dot">.</span></a>
+                        <span class="slogan d-block">关注web前端及Django的个人博客站</span>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <!-- header buttons -->
+                        <div class="header-buttons float-md-end mt-4 mt-md-0">
+{#                            <button class="search icon-button">#}
+{#                                <i class="icon-magnifier"></i>#}
+{#                            </button>#}
+                            <button class="burger-menu icon-button ms-2 float-end float-md-none">
+                                <span class="burger-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-xl">
+
+                    <div class="collapse navbar-collapse justify-content-center centered-nav">
+                        <!-- menus -->
+                        <ul class="navbar-nav">
+                             <li class="nav-item">
+                                <a class="nav-link" href="{% url 'article:article_list_index' %}">主页</a>
+                            </li>
+                            <li class="nav-item dropdown">
+							<span class="nav-link dropdown-toggle" >分类</span>
+							<ul class="dropdown-menu">
+                                {% for sort in sorts %}
+                                    <li><a class="dropdown-item" href="{% url 'article:article_category' sort.id %}">{{ sort.SortTitle }}</a></li>
+                                {% endfor %}
+							</ul>
+						</li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'article:about_me' %}">关于</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+
+        <!-- section hero -->
+        <section class="hero data-bg-image d-flex align-items-center"
+                 data-bg-image="{% static 'images/other/hero.jpg' %}">
+            <div class="container-xl">
+                <!-- call to action -->
+                <div class="cta text-center">
+                    <h2 class="mt-0 mb-4">ME-LY</h2>
+                    <p class="mt-0 mb-4">
+                        最早学习Linux运维，后学习web安全以及SEO搜索引擎优化，后对Python感兴趣，后又学习于Django框架，也尝试用过Bootstrap和Bulma，此站试用Django+Bootstrap搭建而成，目前对基础功能有文章页面，列表页面，标签页面，以及右侧边栏对博客基础功能，后期会根据需求对升级不断对完善与补充！</p>
+                    <a href="{% url 'article:about_me' %}" class="btn btn-light mt-2">关于我</a>
+                </div>
+            </div>
+            <!-- animated mouse wheel -->
+            <span class="mouse">
+            <span class="wheel"></span>
+        </span>
+            <!-- wave svg -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260">
+                <path fill="#FFF" fill-opacity="1"
+                      d="M0,256L60,245.3C120,235,240,213,360,218.7C480,224,600,256,720,245.3C840,235,960,181,1080,176C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            </svg>
+        </section>
+        <section class="hero-carousel">
+            <div class="container-xl">
+                <div class="post-carousel-lg">
+                    <!-- post -->
+                    {% for foo in articleslist_select %}
+                        <div class="post featured-post-xl">
+                            <div class="details clearfix">
+                                <a href="{% url 'article:article_category' foo.arSort.id %}" class="category-badge lg">{{ foo.arSort }}</a>
+                                <h4 class="post-title"><a href="{% url 'article:article_detail' foo.id %}">{{ foo.title }}</a></h4>
+                                <ul class="meta list-inline mb-0">
+                                    <li class="list-inline-item">{{ foo.author }}</li>
+                                    <li class="list-inline-item">{{ foo.poTime }}</li>
+                                </ul>
+                            </div>
+                            <a href="{% url 'article:article_detail' foo.id %}">
+                                <div class="thumb rounded">
+                                    <div class="inner data-bg-image"
+                                         data-bg-image="{{ foo.arImg.url }}"></div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <!-- post -->
+                </div>
+            </div>
+        </section>
+        <!-- section main content -->
+        <section class="main-content" style="overflow:hidden;">
+            <div class="container-xl">
+
+                <div class="row gy-4">
+                    <div class="col-lg-8">
+                        {% for article in articles %}
+                            <!-- post -->
+                            <div class="post post-classic rounded bordered">
+                                <div class="thumb top-rounded">
+                                    <a href="{% url 'article:article_category' article.arSort.id %}"
+                                       class="category-badge lg position-absolute">{{ article.arSort }}</a>
+                                    <span class="post-format">
+								<i class="icon-picture"></i>
+							</span>
+                                    <a href="{% url 'article:article_detail' article.id %}">
+                                        <div class="inner">
+                                            <img src="{{ article.arImg.url }}" alt="post-title"/>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="details">
+                                    <ul class="meta list-inline mb-0">
+                                        <li class="list-inline-item">{{ article.author }}</li>
+                                        <li class="list-inline-item">发布:{{ article.poTime }}</li>
+{#                                        <li class="list-inline-item"><i class="icon-bubble"></i>评论:{{ article.comments.count }}</li>#}
+                                    </ul>
+                                    <h5 class="post-title mb-3 mt-3"><a
+                                            href="{% url 'article:article_detail' article.id %}">{{ article.title }}</a>
+                                    </h5>
+                                    <p class="excerpt mb-0">{{ article.asBody|slice:'100' }}...</p>
+                                </div>
+                                <div class="post-bottom clearfix d-flex align-items-center">
+                                    <div class="social-share me-auto">
+                                        <button class="toggle-button icon-share"></button>
+                                        <span class="icons list-unstyled list-inline mb-0">
+                                            世上只有两种编程语言：一种是总是被人骂的，一种是从来没人用的。
+                                        </span>
+                                    </div>
+                                    <div class="float-end d-none d-md-block">
+                                        <a href="{% url 'article:article_detail' article.id %}" class="more-link">继续阅读<i
+                                                class="icon-arrow-right"></i></a>
+                                    </div>
+                                    <div class="more-button d-block d-md-none float-end">
+                                        <a href="{% url 'article:article_detail' article.id %}"><span
+                                                class="icon-options"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <nav>
+                            <span class="pagination justify-content-center">
+                                  {% if articles.has_previous %}
+                                      <span class="page-item"><a class="page-link" href="?page=1">首页</a></span>
+                                      <span class="page-item"><a class="page-link" href="?page={{ articles.previous_page_number }}">{{ articles.previous_page_number }}</a></span>
+                                    {% endif %}
+                                    <span class="page-item active" aria-current="page">
+                                        <a href="?page=1"><span class="page-link">{{ articles.number }}</span></a>
+                                    </span>
+                                {% if articles.has_next %}
+                                    <span class="page-item"><a class="page-link" href="?page={{ articles.next_page_number }}">{{ articles.next_page_number }}</a></span>
+                                    <span class="page-item"><a class="page-link" href="?page={{ articles.paginator.num_pages}}">尾页</a></span>
+
+                                {% endif %}
+                            </span>
+                        </nav>
+                    </div>
+                    <div class="col-lg-4">
+
+                        <!-- sidebar -->
+                        {% include 'sidebar.html' %}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div><!-- end site wrapper -->
+
+    <!-- search popup area -->
+    {% include 'search.html' %}
+
+    <!-- canvas menu -->
+    {% include 'sidermenu.html' %}
+{% endblock %}

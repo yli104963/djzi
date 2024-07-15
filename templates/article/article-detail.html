@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block td %}
+    <title>{{ articledetail.title }}</title>
+    <meta name="description" content="{{ articledetail.meDes }}">
+{% endblock %}
+{% block content %}
+
+<!-- site wrapper -->
+<div class="site-wrapper">
+
+	<div class="main-overlay"></div>
+
+	<!-- header -->
+    {% include 'header.html' %}
+
+	<!-- cover header -->
+    <section class="single-cover data-bg-image" data-bg-image="{% static 'images/posts/single-cover.jpg' %}">
+
+        <div class="container-xl">
+
+            <div class="cover-content post">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'article:article_list_index' %}">主页</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'article:article_category' articledetail.arSort.id %}">{{ articledetail.arSort }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ articledetail.title }}</li>
+                    </ol>
+                </nav>
+
+                <!-- post header -->
+                <div class="post-header">
+                    <h1 class="title mt-0 mb-3">{{ articledetail.title }}</h1>
+                    <ul class="meta list-inline mb-0">
+                        <li class="list-inline-item">{{ articledetail.author }}</li>
+                        <li class="list-inline-item">浏览数: {{ articledetail.total_view }}</li>
+                        <li class="list-inline-item">{{ articledetail.upTime }}</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+	<!-- section main content -->
+	<section class="main-content">
+		<div class="container-xl">
+
+			<div class="row gy-4">
+
+				<div class="col-lg-8">
+					<!-- post single -->
+                    <div class="post post-single">
+						<!-- post content -->
+						<div class="post-content clearfix">
+                            {{ articledetail.asBody|safe }}
+						</div>
+                        <button>
+                        {% if previous_blog %}
+								<a href="{% url 'article:article_detail' previous_blog.id %}"><span style="color: black">上一篇</span></a>
+							{% else %}
+								没有了
+							{% endif %}
+                        </button>
+                        <button style="float:right">
+                        {% if next_blog %}
+                            <a href="{% url 'article:article_detail' next_blog.id %}" ><span style="color: black">下一篇</span></a>
+							{% else %}
+								没有了
+							{% endif %}
+                        </button>
+						<!-- post bottom section -->
+						<div class="post-bottom">
+							<div class="row d-flex align-items-center">
+								<div class="col-md-6 col-12 text-center text-md-start">
+									<!-- tags -->
+                                    {% for tag in articledetail.arTags.all %}
+                                        <a href="{% url 'article:article_tags' tag.id %}" class="tag">
+                                                {{ tag }}
+                                        </a>
+                                    {% endfor %}
+
+								</div>
+{#								<div class="col-md-6 col-12">#}
+{#									<!-- social icons -->#}
+{#									<ul class="social-icons list-unstyled list-inline mb-0 float-md-end">#}
+{#										<li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>#}
+{#                                        <li class="list-inline-item"><a href="#"><i class="fab fa-weixin"></i></a></li>#}
+{#                                        <li class="list-inline-item"><a href="#"><i class="fab fa-weibo"></i></a></li>#}
+{#                                        <li class="list-inline-item"><a href="#"><i class="fab fa-zhihu"></i></a></li>#}
+{#                                        <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>#}
+{#                                        <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#									</ul>#}
+{#								</div>#}
+							</div>
+						</div>
+
+                    </div>
+
+					<div class="spacer" data-height="50"></div>
+
+					<div class="about-author padding-30 rounded">
+						<div class="thumb">
+							<img src="{% static 'images/other/avatar-about.jpg' %}" alt="Katen Doe" />
+                        </div>
+						<div class="details">
+							<h4 class="name"><a href="{% url 'article:about_me' %}">ME-LY</a></h4>
+							<p>最早学习Linux运维，后学习web安全以及SEO搜索引擎优化，后对Python感兴趣，后又学习于Django框架，也尝试用过Bootstrap和Bulma，此站使用Django+Bootstrap搭建而成，目前对基础功能有文章页面，列表页面，标签页面，以及右侧边栏对博客基础功能，后期会根据需求对升级不断对完善与补充！
+
+</p>
+						</div>
+					</div>
+
+					<div class="spacer" data-height="50"></div>
+					<div class="spacer" data-height="50"></div>
+
+                </div>
+
+				<div class="col-lg-4">
+                        {% include 'sidebar.html' %}
+					<!-- sidebar -->
+                </div>
+			</div>
+
+		</div>
+	</section>
+
+</div><!-- end site wrapper -->
+
+<!-- search popup area -->
+{% include 'search.html' %}
+
+<!-- canvas menu -->
+{% include 'sidermenu.html' %}
+
+{% endblock %}

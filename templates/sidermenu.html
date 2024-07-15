@@ -1,0 +1,28 @@
+{% load static %}
+<div class="canvas-menu d-flex align-items-end flex-column">
+	<!-- close button -->
+	<button type="button" class="btn-close" aria-label="Close"></button>
+
+	<!-- logo -->
+	<div class="logo">
+		<img src="{% static 'images/logo.svg' %}" alt="logo图片" />
+	</div>
+
+	<!-- menu -->
+	<nav>
+		<ul class="vertical-menu">
+            <li><a href="{% url 'article:article_list_index' %}">主页</a></li>
+			<li class="active">
+				<a href="">分类</a>
+				<ul class="submenu">
+                        {% for sort in sorts %}
+                            <li><a href="{% url 'article:article_category' sort.id %}">{{ sort.SortTitle }}</a></li>
+                        {% endfor %}
+				</ul>
+			</li>
+            <li><a href="{% url 'article:about_me' %}">关于</a></li>
+		</ul>
+	</nav>
+	<!-- social icons -->
+	{% include 'social.html' %}
+</div>

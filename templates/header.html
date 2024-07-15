@@ -1,0 +1,64 @@
+{% load static %}
+        <header class="header-personal">
+            <div class="container-xl header-top">
+                <div class="row align-items-center">
+                    <div class="col-4 d-none d-md-block d-lg-block">
+                        <!-- social icons -->
+{#                        <ul class="social-icons list-unstyled list-inline mb-0">#}
+{#                            <li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-weixin"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-weibo"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-zhihu"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>#}
+{#                            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#                        </ul>#}
+                        <span>“没有绝世神功”</span>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+                        <!-- site logo -->
+                        <a href="{% url 'article:article_list_index' %}" class="d-block text-logo">风轻云淡<span class="dot">.</span></a>
+                        <span class="slogan d-block">关注web前端及Django的个人博客站</span>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <!-- header buttons -->
+                        <div class="header-buttons float-md-end mt-4 mt-md-0">
+{#                            <button class="search icon-button">#}
+{#                                <i class="icon-magnifier"></i>#}
+{#                            </button>#}
+                            <button class="burger-menu icon-button ms-2 float-end float-md-none">
+                                <span class="burger-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-xl">
+                    <div class="collapse navbar-collapse justify-content-center centered-nav">
+                        <!-- menus -->
+                        <ul class="navbar-nav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'article:article_list_index' %}">主页</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <span class="nav-link dropdown-toggle" >分类</span>
+                                    <ul class="dropdown-menu">
+                                        {% for sort in sorts %}
+                                            <li><a class="dropdown-item" href="{% url 'article:article_category' sort.pk %}">{{ sort.SortTitle }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'article:about_me' %}">关于</a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>

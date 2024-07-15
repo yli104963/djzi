@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block td %}
+    <title>标签为:{{ t }}的页面</title>
+    <meta name="description" content="{{t }}">
+{% endblock %}
+{% block content %}
+    <!-- site wrapper -->
+    <div class="site-wrapper">
+        <div class="main-overlay"></div>
+        {% include 'header.html' %}
+        <section class="page-header">
+            <div class="container-xl">
+                <div class="text-center">
+                    <h1 class="mt-0 mb-2"></h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center mb-0">
+                            <li class="breadcrumb-item"><a href="{% url 'article:article_list_index' %}">主页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ t.name }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <!-- section main content -->
+        <section class="main-content">
+            <div class="container-xl">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-8">
+
+                        {% for article in  articles%}
+                            <!-- post -->
+                            <div class="post post-classic rounded bordered">
+                                <div class="thumb top-rounded">
+                                    <a href="{% url 'article:article_category' article.arSort.id %}"
+                                       class="category-badge lg position-absolute">{{ article.arSort }}</a>
+                                    <span class="post-format">
+								<i class="icon-picture"></i>
+							</span>
+                                    <a href="{% url 'article:article_detail' article.id %}">
+                                        <div class="inner">
+                                            <img src="{{ article.arImg.url }}" alt="post-title"/>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="details">
+                                    <ul class="meta list-inline mb-0">
+                                        <li class="list-inline-item">作者:{{ article.author }}</li>
+                                        <li class="list-inline-item">发布:{{ article.poTime }}</li>
+                                    </ul>
+                                    <h5 class="post-title mb-3 mt-3"><a
+                                            href="{% url 'article:article_detail' article.id %}">{{ article.title }}</a>
+                                    </h5>
+                                    <p class="excerpt mb-0">{{ article.asBody|slice:'100' }}...</p>
+                                </div>
+                                <div class="post-bottom clearfix d-flex align-items-center">
+                                    <div class="social-share me-auto">
+                                        <button class="toggle-button icon-share"></button>
+{#                                        <ul class="icons list-unstyled list-inline mb-0">#}
+{#                                            <li class="list-inline-item"><a href="{% url 'article:go1' %}"><i class="fab fa-qq"></i></a></li>#}
+{#                                            <li class="list-inline-item"><a href="#"><i class="fab fa-weixin"></i></a>#}
+{#                                            </li>#}
+{#                                            <li class="list-inline-item"><a href="#"><i class="fab fa-weibo"></i></a>#}
+{#                                            </li>#}
+{#                                            <li class="list-inline-item"><a href="#"><i class="fab fa-zhihu"></i></a>#}
+{#                                            </li>#}
+{#                                            <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a>#}
+{#                                            </li>#}
+{#                                            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+                                        <span class="icons list-unstyled list-inline mb-0">
+                                            世上只有两种编程语言：一种是总是被人骂的，一种是从来没人用的。
+                                        </span>
+                                    </div>
+                                    <div class="float-end d-none d-md-block">
+                                        <a href="{% url 'article:article_detail' article.id %}" class="more-link">继续阅读<i
+                                                class="icon-arrow-right"></i></a>
+                                    </div>
+                                    <div class="more-button d-block d-md-none float-end">
+                                        <a href="{% url 'article:article_detail' article.id %}"><span
+                                                class="icon-options"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <nav>
+                            <span class="pagination justify-content-center">
+                                  {% if articles.has_previous %}
+                                      <span class="page-item"><a class="page-link" href="?page=1">首页</a></span>
+                                      <span class="page-item"><a class="page-link" href="?page={{ articles.previous_page_number }}">{{ articles.previous_page_number }}</a></span>
+                                    {% endif %}
+                                    <span class="page-item active" aria-current="page">
+                                        <a href="?page=1"><span class="page-link">{{ articles.number }}</span></a>
+                                    </span>
+                                {% if articles.has_next %}
+                                    <span class="page-item"><a class="page-link" href="?page={{ articles.next_page_number }}">{{ articles.next_page_number }}</a></span>
+                                    <span class="page-item"><a class="page-link" href="?page={{ articles.paginator.num_pages}}">尾页</a></span>
+
+                                {% endif %}
+                            </span>
+                        </nav>
+
+                    </div>
+                    <div class="col-lg-4">
+                        {% include 'sidebar.html' %}
+                        <!-- sidebar -->
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div><!-- end site wrapper -->
+
+    <!-- search popup area -->
+    {% include 'search.html' %}
+
+    <!-- canvas menu -->
+    {% include 'sidermenu.html' %}
+{% endblock %}
